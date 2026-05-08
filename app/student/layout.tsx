@@ -2,27 +2,31 @@ import { redirect } from 'next/navigation'
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import PortalShell from '@/components/portal/PortalShell'
 import type { NavSection } from '@/components/portal/Sidebar'
+import {
+  Home, Calendar, BarChart3, ClipboardCheck, PenLine,
+  Megaphone, CalendarDays, BookMarked, Heart, ClipboardList, MessageSquare,
+} from 'lucide-react'
 
 const studentNav: NavSection[] = [
   {
     section: 'My School',
     items: [
-      { label: 'Dashboard',       href: '/student',            icon: '🏠' },
-      { label: 'Timetable',       href: '/student/timetable',  icon: '📅' },
-      { label: 'Marks & Reports', href: '/student/marks',      icon: '📊' },
-      { label: 'Attendance',      href: '/student/attendance',  icon: '✅' },
-      { label: 'Homework',        href: '/student/homework',    icon: '📝', badge: 3 },
+      { label: 'Dashboard',       href: '/student',             icon: Home },
+      { label: 'Timetable',       href: '/student/timetable',   icon: Calendar },
+      { label: 'Marks & Reports', href: '/student/marks',       icon: BarChart3 },
+      { label: 'Attendance',      href: '/student/attendance',  icon: ClipboardCheck },
+      { label: 'Homework',        href: '/student/homework',    icon: PenLine, badge: 3 },
     ],
   },
   {
     section: 'School Life',
     items: [
-      { label: 'Notices',         href: '/student/notices',    icon: '📢', badge: 2 },
-      { label: 'School Calendar', href: '/student/calendar',   icon: '📆' },
-      { label: 'Library',         href: '/student/library',    icon: '📚' },
-      { label: 'Wellbeing',       href: '/student/wellbeing',  icon: '💚' },
-      { label: 'School Rules',    href: '/student/rules',      icon: '📋' },
-      { label: 'Messages',        href: '/student/messages',   icon: '💬', badge: 1 },
+      { label: 'Notices',         href: '/student/notices',    icon: Megaphone, badge: 2 },
+      { label: 'School Calendar', href: '/student/calendar',   icon: CalendarDays },
+      { label: 'Library',         href: '/student/library',    icon: BookMarked },
+      { label: 'Wellbeing',       href: '/student/wellbeing',  icon: Heart },
+      { label: 'School Rules',    href: '/student/rules',      icon: ClipboardList },
+      { label: 'Messages',        href: '/student/messages',   icon: MessageSquare, badge: 1 },
     ],
   },
 ]
@@ -43,11 +47,9 @@ export default async function StudentLayout({
 }) {
   const supabase = await createServerSupabaseClient()
 
-  // Get session
   const { data: { session } } = await supabase.auth.getSession()
   if (!session) redirect('/login')
 
-  // Get profile
   const { data: profile } = await supabase
     .from('profiles')
     .select('full_name, role')

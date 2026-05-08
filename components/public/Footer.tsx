@@ -1,9 +1,17 @@
 'use client'
 
 import Link from 'next/link'
+import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 
 export default function Footer() {
   const year = new Date().getFullYear()
+
+  const contactItems = [
+    { Icon: MapPin,  text: '123 School Street, Thohoyandou, 0950' },
+    { Icon: Phone,   text: '015 000 1234' },
+    { Icon: Mail,    text: 'info@mulima.edu.za' },
+    { Icon: Clock,   text: 'Mon–Fri · 07:00–16:00' },
+  ]
 
   return (
     <footer style={{
@@ -99,19 +107,14 @@ export default function Footer() {
             <div style={{ color: '#fff', fontWeight: 600, fontSize: '13px', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Contact
             </div>
-            {[
-              { icon: '📍', text: '123 School Street, Thohoyandou, 0950' },
-              { icon: '📞', text: '015 000 1234' },
-              { icon: '📧', text: 'info@mulima.edu.za' },
-              { icon: '⏰', text: 'Mon–Fri · 07:00–16:00' },
-            ].map((item, i) => (
-              <div key={i} style={{
-                display: 'flex', gap: '8px',
+            {contactItems.map(({ Icon, text }) => (
+              <div key={text} style={{
+                display: 'flex', gap: '8px', alignItems: 'flex-start',
                 fontSize: '13px', marginBottom: '8px',
                 color: 'rgba(255,255,255,0.65)',
               }}>
-                <span>{item.icon}</span>
-                <span>{item.text}</span>
+                <Icon size={14} strokeWidth={1.8} style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span>{text}</span>
               </div>
             ))}
           </div>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
+import { User, Settings, HelpCircle, LogOut } from 'lucide-react'
 
 interface TopbarProps {
   userFullName: string
@@ -29,6 +30,12 @@ export default function Topbar({ userFullName, userRole, initials }: TopbarProps
     teacher: 'Teacher Portal',
     admin:   'Administration',
   }
+
+  const menuItems = [
+    { Icon: User,        label: 'My profile',    href: `/${userRole}/profile` },
+    { Icon: Settings,    label: 'Settings',      href: `/${userRole}/settings` },
+    { Icon: HelpCircle,  label: 'Help & support', href: '/contact' },
+  ]
 
   return (
     <header style={{
@@ -86,7 +93,6 @@ export default function Topbar({ userFullName, userRole, initials }: TopbarProps
           <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
             <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 00-5-5.917V4a1 1 0 00-2 0v1.083A6 6 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
-          {/* unread dot */}
           <div style={{
             position: 'absolute', top: '6px', right: '6px',
             width: '7px', height: '7px',
@@ -165,14 +171,10 @@ export default function Topbar({ userFullName, userRole, initials }: TopbarProps
               </div>
 
               {/* Menu items */}
-              {[
-                { icon: '👤', label: 'My profile',   href: `/${userRole}/profile` },
-                { icon: '⚙️', label: 'Settings',     href: `/${userRole}/settings` },
-                { icon: '❓', label: 'Help & support', href: '/contact' },
-              ].map(item => (
+              {menuItems.map(({ Icon, label, href }) => (
                 <Link
-                  key={item.label}
-                  href={item.href}
+                  key={label}
+                  href={href}
                   onClick={() => setDropdownOpen(false)}
                   style={{
                     display: 'flex', alignItems: 'center', gap: '10px',
@@ -184,8 +186,8 @@ export default function Topbar({ userFullName, userRole, initials }: TopbarProps
                   onMouseEnter={e => (e.currentTarget.style.background = 'var(--blue-pale)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <span>{item.icon}</span>
-                  <span>{item.label}</span>
+                  <Icon size={15} strokeWidth={1.8} style={{ color: 'var(--gray-mid)', flexShrink: 0 }} />
+                  <span>{label}</span>
                 </Link>
               ))}
 
@@ -204,7 +206,7 @@ export default function Topbar({ userFullName, userRole, initials }: TopbarProps
                   onMouseEnter={e => (e.currentTarget.style.background = 'var(--danger-bg)')}
                   onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <span>🚪</span>
+                  <LogOut size={15} strokeWidth={1.8} style={{ flexShrink: 0 }} />
                   <span>{signingOut ? 'Signing out...' : 'Sign out'}</span>
                 </button>
               </div>

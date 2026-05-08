@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+import { AlertTriangle, Eye, EyeOff } from 'lucide-react'
 
 export default function LoginForm() {
   const [email, setEmail]       = useState('')
@@ -95,7 +96,7 @@ export default function LoginForm() {
         {/* Error alert */}
         {error && (
           <div className="alert alert-danger" style={{ marginBottom: '20px' }}>
-            <span>⚠️</span>
+            <AlertTriangle size={14} strokeWidth={2} style={{ flexShrink: 0 }} />
             <span>{error}</span>
           </div>
         )}
@@ -144,11 +145,12 @@ export default function LoginForm() {
                   transform: 'translateY(-50%)',
                   background: 'none', border: 'none',
                   cursor: 'pointer', color: 'var(--gray-mid)',
-                  fontSize: '16px', padding: '4px',
+                  padding: '4px',
+                  display: 'flex', alignItems: 'center',
                 }}
                 aria-label="Toggle password visibility"
               >
-                {showPass ? '🙈' : '👁️'}
+                {showPass ? <EyeOff size={16} strokeWidth={1.8} /> : <Eye size={16} strokeWidth={1.8} />}
               </button>
             </div>
           </div>

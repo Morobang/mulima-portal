@@ -2,33 +2,39 @@ import { redirect } from 'next/navigation'
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import PortalShell from '@/components/portal/PortalShell'
 import type { NavSection } from '@/components/portal/Sidebar'
+import {
+  Home, Users, UserCog,
+  Calendar, TrendingUp, AlertTriangle,
+  CreditCard, Megaphone, MessageSquare,
+  Package, Building2, Scale,
+} from 'lucide-react'
 
 const adminNav: NavSection[] = [
   {
     section: 'School Overview',
     items: [
-      { label: 'Dashboard',         href: '/admin',               icon: '🏠' },
-      { label: 'Enrolment',         href: '/admin/enrolment',     icon: '👥' },
-      { label: 'Staff Management',  href: '/admin/staff',         icon: '👩‍🏫' },
+      { label: 'Dashboard',         href: '/admin',               icon: Home },
+      { label: 'Enrolment',         href: '/admin/enrolment',     icon: Users },
+      { label: 'Staff Management',  href: '/admin/staff',         icon: UserCog },
     ],
   },
   {
     section: 'Academics',
     items: [
-      { label: 'Timetable Admin',   href: '/admin/timetable',     icon: '📅' },
-      { label: 'Analytics',         href: '/admin/analytics',     icon: '📈' },
-      { label: 'At-Risk Learners',  href: '/admin/at-risk',       icon: '⚠️', badge: 3 },
+      { label: 'Timetable Admin',   href: '/admin/timetable',     icon: Calendar },
+      { label: 'Analytics',         href: '/admin/analytics',     icon: TrendingUp },
+      { label: 'At-Risk Learners',  href: '/admin/at-risk',       icon: AlertTriangle, badge: 3 },
     ],
   },
   {
     section: 'Operations',
     items: [
-      { label: 'Fee Management',    href: '/admin/fees',          icon: '💳' },
-      { label: 'Post Notices',      href: '/admin/notices',       icon: '📢' },
-      { label: 'Parent Comms',      href: '/admin/comms',         icon: '💬' },
-      { label: 'Inventory',         href: '/admin/inventory',     icon: '📦' },
-      { label: 'Facilities',        href: '/admin/facilities',    icon: '🏫' },
-      { label: 'SGB & Governance',  href: '/admin/sgb',           icon: '⚖️' },
+      { label: 'Fee Management',    href: '/admin/fees',          icon: CreditCard },
+      { label: 'Post Notices',      href: '/admin/notices',       icon: Megaphone },
+      { label: 'Parent Comms',      href: '/admin/comms',         icon: MessageSquare },
+      { label: 'Inventory',         href: '/admin/inventory',     icon: Package },
+      { label: 'Facilities',        href: '/admin/facilities',    icon: Building2 },
+      { label: 'SGB & Governance',  href: '/admin/sgb',           icon: Scale },
     ],
   },
 ]

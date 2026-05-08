@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+import { Mail, AlertTriangle } from 'lucide-react'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail]     = useState('')
@@ -63,7 +64,14 @@ export default function ForgotPasswordPage() {
       }}>
         {sent ? (
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '48px', marginBottom: '16px' }}>📧</div>
+            <div style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              width: '72px', height: '72px',
+              background: 'var(--blue-pale)', borderRadius: '50%',
+              margin: '0 auto 16px',
+            }}>
+              <Mail size={32} strokeWidth={1.5} style={{ color: 'var(--blue)' }} />
+            </div>
             <h2 style={{ color: 'var(--navy)', marginBottom: '10px', fontSize: '18px' }}>
               Check your email
             </h2>
@@ -83,7 +91,8 @@ export default function ForgotPasswordPage() {
           <form onSubmit={handleReset}>
             {error && (
               <div className="alert alert-danger" style={{ marginBottom: '20px' }}>
-                <span>⚠️</span><span>{error}</span>
+                <AlertTriangle size={14} strokeWidth={2} style={{ flexShrink: 0 }} />
+                <span>{error}</span>
               </div>
             )}
             <div style={{ marginBottom: '20px' }}>

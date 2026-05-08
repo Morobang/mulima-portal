@@ -2,26 +2,31 @@ import { redirect } from 'next/navigation'
 import { createServerSupabaseClient } from '@/lib/supabase-server'
 import PortalShell from '@/components/portal/PortalShell'
 import type { NavSection } from '@/components/portal/Sidebar'
+import {
+  Home, BarChart3, ClipboardCheck, FileText,
+  CreditCard, Megaphone, CalendarDays,
+  MessageSquare, Phone, Bus,
+} from 'lucide-react'
 
 const parentNav: NavSection[] = [
   {
     section: 'My Child',
     items: [
-      { label: 'Overview',          href: '/parent',              icon: '🏠' },
-      { label: 'Academic Progress', href: '/parent/progress',     icon: '📊' },
-      { label: 'Attendance',        href: '/parent/attendance',   icon: '✅' },
-      { label: 'Report Card',       href: '/parent/report',       icon: '📄' },
+      { label: 'Overview',          href: '/parent',              icon: Home },
+      { label: 'Academic Progress', href: '/parent/progress',     icon: BarChart3 },
+      { label: 'Attendance',        href: '/parent/attendance',   icon: ClipboardCheck },
+      { label: 'Report Card',       href: '/parent/report',       icon: FileText },
     ],
   },
   {
     section: 'School',
     items: [
-      { label: 'School Fees',       href: '/parent/fees',         icon: '💳' },
-      { label: 'Notices & News',    href: '/parent/notices',      icon: '📢', badge: 3 },
-      { label: 'School Calendar',   href: '/parent/calendar',     icon: '📆' },
-      { label: 'Message Teacher',   href: '/parent/messages',     icon: '💬' },
-      { label: 'Contact School',    href: '/parent/contact',      icon: '📞' },
-      { label: 'Transport Auth.',   href: '/parent/transport',    icon: '🚌' },
+      { label: 'School Fees',       href: '/parent/fees',         icon: CreditCard },
+      { label: 'Notices & News',    href: '/parent/notices',      icon: Megaphone, badge: 3 },
+      { label: 'School Calendar',   href: '/parent/calendar',     icon: CalendarDays },
+      { label: 'Message Teacher',   href: '/parent/messages',     icon: MessageSquare },
+      { label: 'Contact School',    href: '/parent/contact',      icon: Phone },
+      { label: 'Transport Auth.',   href: '/parent/transport',    icon: Bus },
     ],
   },
 ]

@@ -1,5 +1,13 @@
 import Link from 'next/link'
 import { createServerSupabaseClient } from '@/lib/supabase-server'
+import {
+  GraduationCap, Users, BookOpen, Building2,
+  Check, ArrowRight,
+  Trophy, Award, CheckCircle2,
+  Target, Eye, Star,
+  MapPin, Phone, Mail, Globe,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 // ── DATA FETCHING ─────────────────────────────────────────
 async function getPublicNotices() {
@@ -153,10 +161,17 @@ function HeroSection() {
 }
 
 function PortalCards() {
-  const portals = [
+  const portals: {
+    role: string
+    Icon: LucideIcon
+    color: string
+    bg: string
+    description: string
+    features: string[]
+  }[] = [
     {
       role: 'Student',
-      icon: '🎓',
+      Icon: GraduationCap,
       color: 'var(--blue)',
       bg: 'var(--blue-pale)',
       description: 'View your marks, timetable, attendance, homework, notices, and wellbeing resources.',
@@ -164,7 +179,7 @@ function PortalCards() {
     },
     {
       role: 'Parent',
-      icon: '👨‍👩‍👧',
+      Icon: Users,
       color: 'var(--success)',
       bg: 'var(--success-bg)',
       description: "Monitor your child's academic progress, fees, attendance, and communicate with educators.",
@@ -172,7 +187,7 @@ function PortalCards() {
     },
     {
       role: 'Teacher',
-      icon: '📚',
+      Icon: BookOpen,
       color: 'var(--warning)',
       bg: 'var(--warning-bg)',
       description: 'Take attendance, enter marks, write report comments, set homework, and message parents.',
@@ -180,7 +195,7 @@ function PortalCards() {
     },
     {
       role: 'Administration',
-      icon: '🏫',
+      Icon: Building2,
       color: 'var(--navy)',
       bg: 'var(--blue-light)',
       description: 'Full school oversight — analytics, enrolment, fees, staff, timetable, and communications.',
@@ -240,9 +255,8 @@ function PortalCards() {
                 background: portal.bg,
                 borderRadius: '14px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '24px',
               }}>
-                {portal.icon}
+                <portal.Icon size={24} strokeWidth={1.6} style={{ color: portal.color }} />
               </div>
 
               {/* Title */}
@@ -262,7 +276,7 @@ function PortalCards() {
                     display: 'flex', alignItems: 'center', gap: '8px',
                     fontSize: '13px', color: 'var(--gray-dark)',
                   }}>
-                    <span style={{ color: portal.color, fontSize: '11px' }}>✓</span>
+                    <Check size={12} strokeWidth={2.5} style={{ color: portal.color, flexShrink: 0 }} />
                     {f}
                   </li>
                 ))}
@@ -278,7 +292,8 @@ function PortalCards() {
                     color: portal.color, textDecoration: 'none',
                   }}
                 >
-                  Sign in as {portal.role} →
+                  Sign in as {portal.role}
+                  <ArrowRight size={14} strokeWidth={2} />
                 </Link>
               </div>
             </div>
@@ -290,13 +305,13 @@ function PortalCards() {
 }
 
 function StatsBar() {
-  const stats = [
-    { value: '612', label: 'Enrolled learners', icon: '👩‍🎓' },
-    { value: '28',  label: 'Qualified educators', icon: '👩‍🏫' },
-    { value: '37',  label: 'Years of excellence', icon: '🏆' },
-    { value: '6',   label: 'Learning grades', icon: '📖' },
-    { value: '94%', label: 'Average attendance', icon: '✅' },
-    { value: '82%', label: 'Matric pass rate', icon: '🎓' },
+  const stats: { value: string; label: string; Icon: LucideIcon }[] = [
+    { value: '612',  label: 'Enrolled learners',    Icon: GraduationCap },
+    { value: '28',   label: 'Qualified educators',  Icon: Users },
+    { value: '37',   label: 'Years of excellence',  Icon: Trophy },
+    { value: '6',    label: 'Learning grades',      Icon: BookOpen },
+    { value: '94%',  label: 'Average attendance',   Icon: CheckCircle2 },
+    { value: '82%',  label: 'Matric pass rate',     Icon: Award },
   ]
 
   return (
@@ -313,7 +328,12 @@ function StatsBar() {
         }}>
           {stats.map(stat => (
             <div key={stat.label}>
-              <div style={{ fontSize: '28px', marginBottom: '6px' }}>{stat.icon}</div>
+              <div style={{
+                display: 'flex', justifyContent: 'center',
+                marginBottom: '6px', color: 'rgba(255,255,255,0.5)',
+              }}>
+                <stat.Icon size={28} strokeWidth={1.4} />
+              </div>
               <div style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '32px', fontWeight: 700,
@@ -334,6 +354,24 @@ function StatsBar() {
 }
 
 function AboutSection() {
+  const items: { Icon: LucideIcon; title: string; text: string }[] = [
+    {
+      Icon: Target,
+      title: 'Our Mission',
+      text: 'To provide quality, inclusive education that develops confident, capable, and responsible citizens.',
+    },
+    {
+      Icon: Eye,
+      title: 'Our Vision',
+      text: 'A fully connected school community where every learner achieves their highest potential.',
+    },
+    {
+      Icon: Star,
+      title: 'Our Values',
+      text: 'Excellence · Integrity · Respect · Ubuntu · Hard work · Community',
+    },
+  ]
+
   return (
     <section style={{ padding: '96px 0', background: 'var(--gray-light)' }}>
       <div className="container-school">
@@ -388,35 +426,19 @@ function AboutSection() {
 
           {/* Info cards */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {[
-              {
-                icon: '🎯',
-                title: 'Our Mission',
-                text: 'To provide quality, inclusive education that develops confident, capable, and responsible citizens.',
-              },
-              {
-                icon: '👁️',
-                title: 'Our Vision',
-                text: 'A fully connected school community where every learner achieves their highest potential.',
-              },
-              {
-                icon: '⭐',
-                title: 'Our Values',
-                text: 'Excellence · Integrity · Respect · Ubuntu · Hard work · Community',
-              },
-            ].map(item => (
+            {items.map(item => (
               <div
                 key={item.title}
                 className="card"
                 style={{ padding: '20px 24px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}
               >
                 <div style={{
-                  fontSize: '22px', width: '44px', height: '44px',
+                  width: '44px', height: '44px',
                   background: 'var(--blue-pale)', borderRadius: '10px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   flexShrink: 0,
                 }}>
-                  {item.icon}
+                  <item.Icon size={20} strokeWidth={1.6} style={{ color: 'var(--blue)' }} />
                 </div>
                 <div>
                   <div style={{ fontWeight: 600, color: 'var(--navy)', marginBottom: '4px', fontSize: '14px' }}>
@@ -543,6 +565,13 @@ function NoticesSection({ notices }: { notices: any[] }) {
 }
 
 function ContactSection() {
+  const items: { Icon: LucideIcon; title: string; lines: string[] }[] = [
+    { Icon: MapPin,  title: 'Address', lines: ['123 School Street', 'Thohoyandou, 0950', 'Limpopo Province'] },
+    { Icon: Phone,   title: 'Phone',   lines: ['015 000 1234', 'Mon–Fri · 07:00–16:00'] },
+    { Icon: Mail,    title: 'Email',   lines: ['info@mulima.edu.za', 'admin@mulima.edu.za'] },
+    { Icon: Globe,   title: 'Portal',  lines: ['Sign in at /login', 'Support: help@mulima.edu.za'] },
+  ]
+
   return (
     <section style={{ padding: '96px 0', background: 'var(--gray-light)' }}>
       <div className="container-school">
@@ -566,14 +595,14 @@ function ContactSection() {
           maxWidth: '900px',
           margin: '0 auto',
         }}>
-          {[
-            { icon: '📍', title: 'Address', lines: ['123 School Street', 'Thohoyandou, 0950', 'Limpopo Province'] },
-            { icon: '📞', title: 'Phone', lines: ['015 000 1234', 'Mon–Fri · 07:00–16:00'] },
-            { icon: '📧', title: 'Email', lines: ['info@mulima.edu.za', 'admin@mulima.edu.za'] },
-            { icon: '🌐', title: 'Portal', lines: ['Sign in at /login', 'Support: help@mulima.edu.za'] },
-          ].map(item => (
+          {items.map(item => (
             <div key={item.title} className="card" style={{ padding: '24px', textAlign: 'center' }}>
-              <div style={{ fontSize: '28px', marginBottom: '10px' }}>{item.icon}</div>
+              <div style={{
+                display: 'flex', justifyContent: 'center',
+                marginBottom: '10px', color: 'var(--blue)',
+              }}>
+                <item.Icon size={28} strokeWidth={1.5} />
+              </div>
               <div style={{
                 fontWeight: 600, color: 'var(--navy)',
                 marginBottom: '8px', fontSize: '14px',

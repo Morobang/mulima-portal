@@ -2,11 +2,12 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import type { LucideIcon } from 'lucide-react'
 
 export interface NavItem {
   label: string
   href: string
-  icon: string
+  icon: LucideIcon
   badge?: number
 }
 
@@ -71,6 +72,7 @@ export default function Sidebar({ navigation, userFullName, userRole, initials }
             {group.items.map(item => {
               const isActive = pathname === item.href ||
                 (item.href !== `/${userRole}` && pathname.startsWith(item.href))
+              const Icon = item.icon
 
               return (
                 <Link
@@ -78,9 +80,7 @@ export default function Sidebar({ navigation, userFullName, userRole, initials }
                   href={item.href}
                   className={`nav-item ${isActive ? 'active' : ''}`}
                 >
-                  <span style={{ fontSize: '15px', width: '18px', flexShrink: 0 }}>
-                    {item.icon}
-                  </span>
+                  <Icon size={16} strokeWidth={1.8} style={{ flexShrink: 0 }} />
                   <span style={{ flex: 1 }}>{item.label}</span>
                   {item.badge ? (
                     <span style={{
