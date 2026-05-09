@@ -1,10 +1,8 @@
-// proxy.ts (renamed from middleware.ts)
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-// Rename the function from "middleware" to "proxy"
-export async function proxy(req: NextRequest) {  // 👈 Changed from "middleware" to "proxy"
+export async function proxy(req: NextRequest) {
   const res = NextResponse.next()
 
   const supabase = createServerClient(
@@ -25,23 +23,23 @@ export async function proxy(req: NextRequest) {  // 👈 Changed from "middlewar
     }
   )
 
-  const { data: { session } } = await supabase.auth.getSession()
+  const { data: { user } } = await supabase.auth.getUser()
   const path = req.nextUrl.pathname
 
   // ── Not logged in → send to login ───────────────────────
   const protectedPrefixes = ['/student', '/parent', '/teacher', '/admin']
   const isProtected = protectedPrefixes.some(p => path.startsWith(p))
 
-  if (isProtected && !session) {
+  if (isProtected && !user) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
-  // ── Already logged in → don't show login page again ─────
-  if (session && path === '/login') {
+  // ── Already logged in → redirect away from login page ───
+  if (user && path === '/login') {
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
-      .eq('id', session.user.id)
+      .eq('id', user.id)
       .single()
 
     const roleRoutes: Record<string, string> = {
@@ -56,11 +54,11 @@ export async function proxy(req: NextRequest) {  // 👈 Changed from "middlewar
   }
 
   // ── Wrong role accessing wrong section ───────────────────
-  if (session && isProtected) {
+  if (user && isProtected) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
-      .eq('id', session.user.id)
+      .eq('id', user.id)
       .single()
 
     const role = profile?.role ?? ''
