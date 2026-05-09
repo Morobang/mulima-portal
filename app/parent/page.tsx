@@ -40,7 +40,12 @@ async function getParentDashboardData(userId: string) {
   if (!learner) return { parent, learner: null, data: null }
 
   // Marks
-  const { data: marks } = await supabase
+  type Mark = {
+    score: number
+    submitted_at: string
+    assessments: { name: string; max_score: number; date: string; subjects: { name: string } | null } | null
+  }
+  const { data: rawMarks } = await supabase
     .from('marks')
     .select(`
       score, submitted_at,
@@ -52,6 +57,7 @@ async function getParentDashboardData(userId: string) {
     .eq('learner_id', learnerId)
     .order('submitted_at', { ascending: false })
     .limit(5)
+  const marks = (rawMarks ?? []) as unknown as Mark[]
 
   // Attendance
   const { data: attendance } = await supabase
@@ -229,7 +235,7 @@ export default async function ParentDashboard() {
     return due < new Date() && f.status !== 'paid'
   })
   const atRiskSubjects = marks.filter(m => {
-    return getMarkPct(m.score, m.assessments.max_score) < 40
+    return m.assessments != null && getMarkPct(m.score, m.assessments.max_score) < 40
   })
 
   return (
