@@ -94,10 +94,10 @@ function formatDateShort(iso: string) {
 // ── PAGE ──────────────────────────────────────────────────
 export default async function AttendancePage() {
   const supabase = await createServerSupabaseClient()
-  const { data: { session } } = await supabase.auth.getSession()
-  if (!session) redirect('/login')
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login')
 
-  const data = await getAttendanceData(session.user.id)
+  const data = await getAttendanceData(user.id)
   if (!data) redirect('/login')
 
   const { staff, classes, selectedClass, learners, existingRecords, history, todayDate } = data
@@ -106,7 +106,7 @@ export default async function AttendancePage() {
 
   // Group history by date
   const historyByDate: Record<string, typeof history> = {}
-  history.forEach(r => {
+  ;(history ?? []).forEach(r => {
     if (!historyByDate[r.date]) historyByDate[r.date] = []
     historyByDate[r.date].push(r)
   })
