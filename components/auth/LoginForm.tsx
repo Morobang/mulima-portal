@@ -222,8 +222,8 @@ export default function LoginForm() {
         }}>
           <strong style={{ color: 'var(--navy)' }}>First time signing in?</strong><br />
           Your login credentials are provided by the school admin office.
-          Contact us at <span style={{ color: 'var(--blue)' }}>admin@mulima.edu.za</span> or
-          call <span style={{ color: 'var(--blue)' }}>015 000 1234</span>.
+          Contact us at <span style={{ color: 'var(--blue)' }}>mafela@telkomsa.net</span> or
+          call <span style={{ color: 'var(--blue)' }}>015 975 1089</span>.
         </div>
       </div>
 
