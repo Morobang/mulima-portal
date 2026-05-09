@@ -157,7 +157,31 @@ export default async function StudentDashboard() {
   if (!user) redirect('/login')
 
   const data = await getStudentDashboardData(user.id)
-  if (!data) redirect('/login')
+
+  if (!data) {
+    return (
+      <div style={{ padding: '48px', textAlign: 'center' }}>
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          width: '64px', height: '64px',
+          background: 'var(--warning-bg)', borderRadius: '50%',
+          marginBottom: '16px',
+        }}>
+          <AlertTriangle size={28} strokeWidth={1.5} style={{ color: 'var(--warning)' }} />
+        </div>
+        <h2 style={{ color: 'var(--navy)', fontSize: '18px', marginBottom: '8px' }}>
+          Learner profile not found
+        </h2>
+        <p style={{ color: 'var(--gray-mid)', fontSize: '14px', maxWidth: '360px', margin: '0 auto 24px', lineHeight: 1.6 }}>
+          Your student record has not been linked to this account yet.
+          Please contact the school administration office.
+        </p>
+        <p style={{ color: 'var(--gray-mid)', fontSize: '13px' }}>
+          Admin email: <strong>mafela@telkomsa.net</strong> · Tel: <strong>015 975 1089</strong>
+        </p>
+      </div>
+    )
+  }
 
   const { learner, todayClasses, recentMarks, attendance, homework, notices, unreadMessages } = data
   const attendanceRate = calcAttendanceRate(attendance)
