@@ -282,3 +282,52 @@ create policy "Authenticated users can read notices"
 create policy "Users see own messages"
   on messages for select
   using (auth.uid() = from_user_id or auth.uid() = to_user_id);
+
+-- Learners: a student can read their own record
+create policy "Students can view own learner record"
+  on learners for select
+  using (auth.uid() = user_id);
+
+-- Marks: a student can read their own marks
+create policy "Students can view own marks"
+  on marks for select
+  using (
+    learner_id in (
+      select id from learners where user_id = auth.uid()
+    )
+  );
+
+-- Attendance: a student can read their own attendance
+create policy "Students can view own attendance"
+  on attendance for select
+  using (
+    learner_id in (
+      select id from learners where user_id = auth.uid()
+    )
+  );
+
+-- Fees: a student can read their own fees
+create policy "Students can view own fees"
+  on fees for select
+  using (
+    learner_id in (
+      select id from learners where user_id = auth.uid()
+    )
+  );
+
+-- Wellbeing: a student can read and insert their own check-ins
+create policy "Students can view own wellbeing checkins"
+  on wellbeing_checkins for select
+  using (
+    learner_id in (
+      select id from learners where user_id = auth.uid()
+    )
+  );
+
+create policy "Students can insert own wellbeing checkins"
+  on wellbeing_checkins for insert
+  with check (
+    learner_id in (
+      select id from learners where user_id = auth.uid()
+    )
+  );

@@ -97,7 +97,21 @@ export default async function MarksPage() {
   if (!user) redirect('/login')
 
   const data = await getMarksData(user.id)
-  if (!data) redirect('/login')
+  if (!data) {
+    return (
+      <div style={{ padding: '48px', textAlign: 'center' }}>
+        <AlertTriangle size={28} strokeWidth={1.5} style={{ color: 'var(--warning)', marginBottom: '12px' }} />
+        <h2 style={{ color: 'var(--navy)', marginBottom: '8px' }}>Learner profile not found</h2>
+        <p style={{ color: 'var(--gray-mid)', marginBottom: '4px' }}>
+          Your student record has not been linked to this account yet.
+        </p>
+        <p style={{ color: 'var(--gray-mid)', fontSize: '13.5px' }}>
+          Please contact the school office to resolve this.
+          <br />Admin: mafela@telkomsa.net · 015 975 1089
+        </p>
+      </div>
+    )
+  }
 
   const { learner, marks } = data
   const subjects = groupBySubject(marks)
