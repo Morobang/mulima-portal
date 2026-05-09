@@ -1,8 +1,10 @@
+// proxy.ts (renamed from middleware.ts)
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export async function middleware(req: NextRequest) {
+// Rename the function from "middleware" to "proxy"
+export async function proxy(req: NextRequest) {  // 👈 Changed from "middleware" to "proxy"
   const res = NextResponse.next()
 
   const supabase = createServerClient(

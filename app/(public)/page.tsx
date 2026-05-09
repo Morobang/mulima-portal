@@ -82,7 +82,7 @@ function HeroSection() {
               boxShadow: '0 0 8px #4ade80',
             }} />
             <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '13px', fontWeight: 500 }}>
-              Portal now open — Term 2, 2025
+              Portal now open — Term 2, 2026
             </span>
           </div>
 
@@ -128,9 +128,9 @@ function HeroSection() {
             flexWrap: 'wrap',
           }}>
             {[
-              { value: '612', label: 'Enrolled learners' },
-              { value: '28',  label: 'Educators' },
-              { value: '1988', label: 'Established' },
+              { value: '359', label: 'Enrolled learners' },
+              { value: '12',  label: 'Educators' },
+              { value: '1997', label: 'Est. active since' },
               { value: '4',   label: 'User portals' },
             ].map(stat => (
               <div key={stat.label}>
@@ -306,12 +306,12 @@ function PortalCards() {
 
 function StatsBar() {
   const stats: { value: string; label: string; Icon: LucideIcon }[] = [
-    { value: '612',  label: 'Enrolled learners',    Icon: GraduationCap },
-    { value: '28',   label: 'Qualified educators',  Icon: Users },
-    { value: '37',   label: 'Years of excellence',  Icon: Trophy },
-    { value: '6',    label: 'Learning grades',      Icon: BookOpen },
-    { value: '94%',  label: 'Average attendance',   Icon: CheckCircle2 },
-    { value: '82%',  label: 'Matric pass rate',     Icon: Award },
+    { value: '359',   label: 'Enrolled learners',    Icon: GraduationCap },
+    { value: '12',   label: 'Qualified educators',  Icon: Users },
+    { value: '29+',  label: 'Years of excellence',  Icon: Trophy },
+    { value: '5',    label: 'Learning grades',      Icon: BookOpen },
+    { value: '96.9%', label: 'Matric pass rate',   Icon: Award },
+    { value: '30:1', label: 'Learner/educator ratio', Icon: CheckCircle2 },
   ]
 
   return (
@@ -401,23 +401,25 @@ function AboutSection() {
               marginBottom: '20px',
               lineHeight: 1.2,
             }}>
-              Excellence in education<br />since 1988
+              Excellence in education<br />since 1997
             </h2>
             <p style={{
               fontSize: '15px', color: 'var(--gray-mid)',
               lineHeight: 1.8, marginBottom: '20px',
             }}>
-              Mulima Secondary School is a public secondary school situated in Thohoyandou,
-              Limpopo Province. We are committed to providing quality education that empowers
-              learners to reach their full potential — academically, socially, and personally.
+              Mulima Secondary School is a public, no-fee (Quintile 2) secondary school
+              situated in Sio Likhade Village, Makhado, Limpopo Province. We are committed
+              to providing quality education that empowers learners to reach their full
+              potential — academically, socially, and personally.
             </p>
             <p style={{
               fontSize: '15px', color: 'var(--gray-mid)',
               lineHeight: 1.8, marginBottom: '32px',
             }}>
-              Our dedicated team of 28 educators work tirelessly to ensure every learner
+              Our dedicated team of 12 educators work tirelessly to ensure every learner
               from Grade 8 to Grade 12 receives the support, resources, and guidance they
-              need to succeed in a changing world.
+              need to succeed in a changing world. In 2025, our learners achieved a
+              96.9% matric pass rate.
             </p>
             <Link href="/about" className="btn btn-primary">
               Learn more about us
@@ -566,10 +568,10 @@ function NoticesSection({ notices }: { notices: any[] }) {
 
 function ContactSection() {
   const items: { Icon: LucideIcon; title: string; lines: string[] }[] = [
-    { Icon: MapPin,  title: 'Address', lines: ['123 School Street', 'Thohoyandou, 0950', 'Limpopo Province'] },
-    { Icon: Phone,   title: 'Phone',   lines: ['015 000 1234', 'Mon–Fri · 07:00–16:00'] },
-    { Icon: Mail,    title: 'Email',   lines: ['info@mulima.edu.za', 'admin@mulima.edu.za'] },
-    { Icon: Globe,   title: 'Portal',  lines: ['Sign in at /login', 'Support: help@mulima.edu.za'] },
+    { Icon: MapPin,  title: 'Address', lines: ['Sio Likhade Village', 'Mulima, Makhado, 0817', 'Limpopo Province'] },
+    { Icon: Phone,   title: 'Phone',   lines: ['015 975 1089', 'Mon–Fri · 07:30–16:00'] },
+    { Icon: Mail,    title: 'Email',   lines: ['mafela@telkomsa.net'] },
+    { Icon: Globe,   title: 'Portal',  lines: ['Sign in at /login', 'EMIS: 931341138'] },
   ]
 
   return (

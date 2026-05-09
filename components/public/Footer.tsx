@@ -7,10 +7,10 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   const contactItems = [
-    { Icon: MapPin,  text: '123 School Street, Thohoyandou, 0950' },
-    { Icon: Phone,   text: '015 000 1234' },
-    { Icon: Mail,    text: 'info@mulima.edu.za' },
-    { Icon: Clock,   text: 'Mon–Fri · 07:00–16:00' },
+    { Icon: MapPin,  text: 'Sio Likhade Village, Mulima, Makhado, 0817' },
+    { Icon: Phone,   text: '015 975 1089' },
+    { Icon: Mail,    text: 'mafela@telkomsa.net' },
+    { Icon: Clock,   text: 'Mon–Fri · 07:30–16:00' },
   ]
 
   return (
@@ -45,7 +45,7 @@ export default function Footer() {
               </div>
               <div>
                 <div style={{ color: '#fff', fontWeight: 600, fontSize: '14px' }}>Mulima Secondary School</div>
-                <div style={{ fontSize: '11px' }}>Est. 1988 · Thohoyandou</div>
+                <div style={{ fontSize: '11px' }}>Est. 1997 · Makhado, Limpopo</div>
               </div>
             </div>
             <p style={{ fontSize: '13px', lineHeight: '1.7' }}>

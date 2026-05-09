@@ -2,12 +2,35 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import type { LucideIcon } from 'lucide-react'
+import {
+  Home, Users, UserCog,
+  Calendar, CalendarDays, CalendarClock,
+  TrendingUp, AlertTriangle,
+  CreditCard, Megaphone, MessageSquare,
+  Package, Building2, Scale,
+  BarChart3, ClipboardCheck, FileText,
+  Phone, Bus, PenLine,
+  BookMarked, BookOpen, Heart,
+  ClipboardList, Folder,
+  type LucideIcon,
+} from 'lucide-react'
+
+const iconMap: Record<string, LucideIcon> = {
+  Home, Users, UserCog,
+  Calendar, CalendarDays, CalendarClock,
+  TrendingUp, AlertTriangle,
+  CreditCard, Megaphone, MessageSquare,
+  Package, Building2, Scale,
+  BarChart3, ClipboardCheck, FileText,
+  Phone, Bus, PenLine,
+  BookMarked, BookOpen, Heart,
+  ClipboardList, Folder,
+}
 
 export interface NavItem {
   label: string
   href: string
-  icon: LucideIcon
+  icon: string
   badge?: number
 }
 
@@ -72,7 +95,7 @@ export default function Sidebar({ navigation, userFullName, userRole, initials }
             {group.items.map(item => {
               const isActive = pathname === item.href ||
                 (item.href !== `/${userRole}` && pathname.startsWith(item.href))
-              const Icon = item.icon
+              const Icon = iconMap[item.icon] ?? Home
 
               return (
                 <Link
@@ -107,7 +130,7 @@ export default function Sidebar({ navigation, userFullName, userRole, initials }
         flexShrink: 0,
       }}>
         <div style={{ fontSize: '11px', color: 'var(--gray-mid)' }}>
-          Mulima Portal · Term 2, 2025
+          Mulima Portal · Term 2, 2026
         </div>
       </div>
     </aside>
