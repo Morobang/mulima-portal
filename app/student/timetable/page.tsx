@@ -14,7 +14,7 @@ async function getTimetableData(userId: string) {
 
   if (!learner) return null
 
-  const { data: slots } = await supabase
+  const { data: rawSlots } = await supabase
     .from('timetable')
     .select(`
       id, day, period, room, start_time, end_time,
@@ -25,7 +25,15 @@ async function getTimetableData(userId: string) {
     .eq('class_group', learner.class_group)
     .order('period', { ascending: true })
 
-  return { learner, slots: slots ?? [] }
+  type Slot = {
+    id: string; day: string; period: number; room: string | null
+    start_time: string; end_time: string
+    subjects: { name: string; code: string } | null
+    staff: { full_name: string } | null
+  }
+  const slots = (rawSlots ?? []) as unknown as Slot[]
+
+  return { learner, slots }
 }
 
 // ── CONSTANTS ─────────────────────────────────────────────
